@@ -10,6 +10,11 @@ import com.xts.shop.model.bean.HomeBean;
 import com.xts.shop.presenter.my.MyPresenter;
 
 public class MyFragment extends BaseFragment<MyContract.Presenter> implements MyContract.View {
+    public static MyFragment newInstance(){
+        MyFragment fragment = new MyFragment();
+        return fragment;
+    }
+
     @Override
     protected void initData() {
         mPresenter.getHomeData();

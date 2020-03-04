@@ -5,7 +5,11 @@ import com.xts.shop.interfaces.IBaseView;
 
 import java.lang.ref.WeakReference;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
+    CompositeDisposable mCompositeDisposable;
 
     public V mView;
     private WeakReference<V> mReference;
@@ -19,5 +23,16 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
     @Override
     public void detachView() {
         mView = null;
+        if (mCompositeDisposable != null){
+            mCompositeDisposable.clear();
+        }
+    }
+
+    public void addDisposable(Disposable d){
+        if (mCompositeDisposable == null){
+            mCompositeDisposable = new CompositeDisposable();
+        }
+
+        mCompositeDisposable.add(d);
     }
 }
