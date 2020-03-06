@@ -21,6 +21,9 @@ public class ResponceSubscriber<T> extends ResourceSubscriber<T> {
     @Override
     public void onError(Throwable t) {
         LogUtils.print(t.toString());
+        if (mView != null){
+            mView.showTips(t.toString());
+        }
     }
 
     @Override

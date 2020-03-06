@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
     @Override
     protected void initView() {
+        mToolBar.setTitle(R.string.title);
+        setSupportActionBar(mToolBar);
         initFragments();
         initTitles();
 

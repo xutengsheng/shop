@@ -8,10 +8,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xts.shop.R;
+import com.xts.shop.apps.BaseApp;
 import com.xts.shop.base.BaseFragment;
 import com.xts.shop.common.ColorDividerItemDecoration;
-import com.xts.shop.interfaces.main.MainContract;
-import com.xts.shop.interfaces.mainpage.MainPageContract;
 import com.xts.shop.interfaces.topic.TopicContract;
 import com.xts.shop.model.bean.TopicBean;
 import com.xts.shop.presenter.topic.TopicPresenter;
@@ -20,7 +19,6 @@ import com.xts.shop.utils.DpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 
@@ -32,16 +30,16 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
     private int mPage = 1;
     private int mSize = 10;
     private RlvTopicAdapter mAdapter;
-    private int mPageSize;
+    private int mTotalPages;
 
-    public static TopicFragment newInstance(){
+    public static TopicFragment newInstance() {
         TopicFragment fragment = new TopicFragment();
         return fragment;
     }
 
     @Override
     protected void initData() {
-        mPresenter.getTopicData(mPage,mSize);
+        mPresenter.getTopicData(mPage, mSize);
     }
 
     @Override
@@ -54,20 +52,31 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
                 getResources().getColor(R.color.c_eaeaea), DpUtil.dp2px(8)
         ));
 
+
         mSrl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mPage++;
-                mPresenter.getTopicData(mPage,mSize);
+                if (mPage < mTotalPages) {
+                    mPage++;
+                    mPresenter.getTopicData(mPage, mSize);
+                }else {
+                    mSrl.setNoMoreData(true);
+                    showTips(BaseApp.getRes().getString(R.string.no_more_data));
+                }
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mAdapter.mList.clear();
                 mPage = 1;
-                mPresenter.getTopicData(mPage,mSize);
+                mPresenter.getTopicData(mPage, mSize);
             }
         });
+    }
+
+    private void hideHeader() {
+        mSrl.finishLoadMore();
+        mSrl.finishRefresh();
     }
 
     @Override
@@ -83,10 +92,11 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
     @Override
     public void setData(TopicBean bean) {
         TopicBean.DataBeanX dataBeanX = bean.getData();
-        mPageSize = dataBeanX.getPageSize();
+        mTotalPages = dataBeanX.getTotalPages();
         List<TopicBean.DataBeanX.DataBean> data = dataBeanX.getData();
-        if (data != null && data.size()>0){
+        if (data != null && data.size() > 0) {
             mAdapter.addData(data);
         }
+        hideHeader();
     }
 }

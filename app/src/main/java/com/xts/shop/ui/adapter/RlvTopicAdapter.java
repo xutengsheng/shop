@@ -54,7 +54,19 @@ public class RlvTopicAdapter extends RecyclerView.Adapter {
 
     public void addData(List<TopicBean.DataBeanX.DataBean> data) {
         mList.addAll(data);
+        //全量刷新
         notifyDataSetChanged();
+        //XRecyclerView
+        ////通知插入了一条数据
+        //notifyItemInserted();
+        //notifyItemMoved(fromPosition,toPosition);//通知两条数据换位置
+        //notifyItemRemoved(position);//通知移除了一条数据
+
+        //notifyItemChanged(position);//通知某个数据发生了改变
+
+        //notifyItemRangeInserted(positionStart,itemCount);//通知从某个位置开始插入数据,共插入了几条
+        //notifyItemRangeChanged(positionStart,itemCount);//通知某个位置开始数据发生了改变,共有几个改变了
+        //notifyItemRangeRemoved(positionStart,itemCount);//通知从某个位置开始移除itemCount个数据
     }
 
     class VH extends RecyclerView.ViewHolder{
