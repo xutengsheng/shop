@@ -15,6 +15,7 @@ import com.xts.shop.interfaces.topic.TopicContract;
 import com.xts.shop.model.bean.TopicBean;
 import com.xts.shop.presenter.topic.TopicPresenter;
 import com.xts.shop.ui.adapter.RlvTopicAdapter;
+import com.xts.shop.ui.adapter.RlvTopicAdapter2;
 import com.xts.shop.utils.DpUtil;
 
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
     SmartRefreshLayout mSrl;
     private int mPage = 1;
     private int mSize = 10;
-    private RlvTopicAdapter mAdapter;
+    //private RlvTopicAdapter mAdapter;
+    private RlvTopicAdapter2 mAdapter2;
     private int mTotalPages;
 
     public static TopicFragment newInstance() {
@@ -46,8 +48,9 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
     protected void initView() {
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         ArrayList<TopicBean.DataBeanX.DataBean> list = new ArrayList<>();
-        mAdapter = new RlvTopicAdapter(getContext(), list);
-        mRlv.setAdapter(mAdapter);
+        //mAdapter = new RlvTopicAdapter(getContext(), list);
+        mAdapter2 = new RlvTopicAdapter2(getContext(), list);
+        mRlv.setAdapter(mAdapter2);
         mRlv.addItemDecoration(new ColorDividerItemDecoration(
                 getResources().getColor(R.color.c_eaeaea), DpUtil.dp2px(8)
         ));
@@ -67,7 +70,7 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mAdapter.mList.clear();
+                mAdapter2.mList.clear();
                 mPage = 1;
                 mPresenter.getTopicData(mPage, mSize);
             }
@@ -95,7 +98,7 @@ public class TopicFragment extends BaseFragment<TopicContract.Presenter> impleme
         mTotalPages = dataBeanX.getTotalPages();
         List<TopicBean.DataBeanX.DataBean> data = dataBeanX.getData();
         if (data != null && data.size() > 0) {
-            mAdapter.addData(data);
+            mAdapter2.addData(data);
         }
         hideHeader();
     }
