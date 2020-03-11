@@ -18,4 +18,6 @@ public interface Constant {
     String TOKEN = "token";
     String USER_NAME = "user_name";
     String AVATAR = "avatar";//头像
+    String DATA = "data";
+    String POSITION = "position";
 }

@@ -1,17 +1,25 @@
 package com.xts.shop;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.xts.shop.base.BaseActivity;
 import com.xts.shop.base.BaseFragment;
+import com.xts.shop.common.Constant;
 import com.xts.shop.interfaces.main.MainContract;
 import com.xts.shop.presenter.main.MainPresenter;
 import com.xts.shop.ui.adapter.VpMainAdpater;
@@ -21,7 +29,10 @@ import com.xts.shop.ui.fragment.MyFragment;
 import com.xts.shop.ui.fragment.SortFragment;
 import com.xts.shop.ui.fragment.TopicFragment;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -115,4 +126,55 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         return inflate;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,0,0,"test");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 0:
+                go2Test();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void go2Test() {
+        Intent intent = new Intent(this, TestActivity.class);
+        String s = Base64.encodeToString(parseBitmap2Byte(), Base64.DEFAULT);
+        intent.putExtra(Constant.DATA,s);
+        startActivity(intent);
+    }
+
+    public byte[] parseBitmap2Byte(){
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_choice_pressed);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] bytes = baos.toByteArray();
+        byte[] word = "hello world".getBytes();
+        int length = bytes.length;
+        bytes = concat(bytes,word);
+        byte[] lenghtByte = int2Byte(length);
+        bytes = concat(bytes,lenghtByte);
+        return bytes;
+    }
+
+    private byte[] int2Byte(int val) {
+        byte[] b = new byte[4];
+        b[0] = (byte)(val & 0xff);
+        b[1] = (byte)((val >> 8) & 0xff);
+        b[2] = (byte)((val >> 16) & 0xff);
+        b[3] = (byte)((val >> 24) & 0xff);
+        return b;
+    }
+
+    //拼接数组
+    private byte[] concat(byte[] bytes, byte[] word) {
+        byte[] data = Arrays.copyOf(bytes, bytes.length + word.length);
+        System.arraycopy(word,0,data,bytes.length,word.length);
+        return data;
+    }
 }

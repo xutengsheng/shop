@@ -2,7 +2,7 @@ package com.xts.shop.model.bean;
 
 import java.util.List;
 
-public class HomeBean {
+public class MainPageBean {
 
     /**
      * errno : 0
