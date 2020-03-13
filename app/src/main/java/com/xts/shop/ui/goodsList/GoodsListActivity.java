@@ -19,6 +19,7 @@ import com.xts.shop.model.bean.GoodsListBean;
 import com.xts.shop.model.bean.SortCurrentBean;
 import com.xts.shop.presenter.goods.GoodsListPresenter;
 import com.xts.shop.ui.adapter.RlvGoodsListAdapter;
+import com.xts.shop.utils.LogUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class GoodsListActivity extends BaseActivity<GoodsListContract.Presenter>
         mCategoryId = mData.get(mClickPosition).getId();
         ArrayList<GoodsListBean.DataBeanX.DataBean> list = new ArrayList<>();
         //mRlv.setLayoutManager(new GridLayoutManager(this,2));
-        mRlv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mRlv.setLayoutManager(new GridLayoutManager(this,2));
         mAdapter = new RlvGoodsListAdapter(this, list);
         mRlv.setAdapter(mAdapter);
 
@@ -65,7 +66,12 @@ public class GoodsListActivity extends BaseActivity<GoodsListContract.Presenter>
         tvTitle.setText(mData.get(mClickPosition).getName());
         tvSubTitle.setText(mData.get(mClickPosition).getFront_name());
 
-        mTabLayout.getTabAt(mClickPosition).select();
+        mTabLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTabLayout.getTabAt(mClickPosition).select();
+            }
+        },100);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

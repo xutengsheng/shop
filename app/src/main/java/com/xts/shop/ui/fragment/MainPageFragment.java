@@ -67,7 +67,7 @@ public class MainPageFragment extends BaseFragment<MainPageContract.Presenter>
 
     @Override
     protected MainPageContract.Presenter initPresenter() {
-        return new MainPagePresenter();
+        return null;
     }
 
     @Override

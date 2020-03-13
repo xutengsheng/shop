@@ -67,5 +67,7 @@ dependencies {
 
     //竖导航
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    //RecyclerView Adapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
 
 }

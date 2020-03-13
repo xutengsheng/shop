@@ -26,6 +26,7 @@ import com.xts.shop.ui.adapter.VpMainAdpater;
 import com.xts.shop.ui.fragment.CartFragment;
 import com.xts.shop.ui.fragment.MainPageFragment;
 import com.xts.shop.ui.fragment.MyFragment;
+import com.xts.shop.ui.fragment.NewMainPageFragment;
 import com.xts.shop.ui.fragment.SortFragment;
 import com.xts.shop.ui.fragment.TopicFragment;
 
@@ -81,7 +82,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
     private void initFragments() {
         mFragments = new ArrayList<>();
-        mFragments.add(MainPageFragment.newInstance());
+        mFragments.add(NewMainPageFragment.newInstance());
         mFragments.add(TopicFragment.newInstance());
         mFragments.add(SortFragment.newInstance());
         mFragments.add(CartFragment.newInstance());

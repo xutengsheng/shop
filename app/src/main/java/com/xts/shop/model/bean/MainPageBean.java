@@ -1,8 +1,32 @@
 package com.xts.shop.model.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 public class MainPageBean {
+
+    public static class MainPageListBean<T> implements MultiItemEntity{
+        public static final int TYPE_BANNER = 1;
+        public static final int TYPE_TITLE = 2;
+        public static final int TYPE_BRAND = 3;
+        public static final int TYPE_NEWGOOD = 4;
+        public static final int TYPE_HOTGOOD = 5;
+        public static final int TYPE_TOPIC = 6;
+        public static final int TYPE_CATEGORY = 7;
+        public static final int TYPE_CHANNEL = 8;
+        public static final int TYPE_VIEW_LINE = 9;
+
+        public int currentType;
+
+        public String title;
+        public T data;
+
+        @Override
+        public int getItemType() {
+            return currentType;
+        }
+    }
 
     /**
      * errno : 0

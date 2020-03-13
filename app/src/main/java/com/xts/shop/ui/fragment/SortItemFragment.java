@@ -20,6 +20,7 @@ import com.xts.shop.model.bean.SortCurrentBean;
 import com.xts.shop.presenter.sort.SortItemPresenter;
 import com.xts.shop.ui.adapter.RlvSortItemAdapter;
 import com.xts.shop.ui.goodsList.GoodsListActivity;
+import com.xts.shop.ui.goodsList.GoodsListActivity2;
 
 import java.util.ArrayList;
 
@@ -64,7 +65,7 @@ public class SortItemFragment extends BaseFragment<SortItemContract.Presenter> i
     }
 
     private void go2GoodsListActivity(int position) {
-        Intent intent = new Intent(getContext(), GoodsListActivity.class);
+        Intent intent = new Intent(getContext(), GoodsListActivity2.class);
         intent.putExtra(Constant.DATA,mAdapter.mList);
         intent.putExtra(Constant.POSITION,position);
         startActivity(intent);
