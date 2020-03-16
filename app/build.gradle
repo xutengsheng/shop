@@ -70,4 +70,6 @@ dependencies {
     //RecyclerView Adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
 
+    implementation 'org.sufficientlysecure:html-textview:3.9'
+
 }

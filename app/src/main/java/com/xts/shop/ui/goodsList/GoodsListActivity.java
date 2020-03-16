@@ -1,11 +1,8 @@
 package com.xts.shop.ui.goodsList;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -15,13 +12,11 @@ import com.xts.shop.R;
 import com.xts.shop.base.BaseActivity;
 import com.xts.shop.common.Constant;
 import com.xts.shop.interfaces.goods.GoodsListContract;
-import com.xts.shop.model.bean.GoodsListBean;
+import com.xts.shop.model.bean.GoodListBean;
 import com.xts.shop.model.bean.SortCurrentBean;
 import com.xts.shop.presenter.goods.GoodsListPresenter;
 import com.xts.shop.ui.adapter.RlvGoodsListAdapter;
-import com.xts.shop.utils.LogUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +47,7 @@ public class GoodsListActivity extends BaseActivity<GoodsListContract.Presenter>
         tab();
 
         mCategoryId = mData.get(mClickPosition).getId();
-        ArrayList<GoodsListBean.DataBeanX.DataBean> list = new ArrayList<>();
+        ArrayList<GoodListBean.DataBeanX.DataBean> list = new ArrayList<>();
         //mRlv.setLayoutManager(new GridLayoutManager(this,2));
         mRlv.setLayoutManager(new GridLayoutManager(this,2));
         mAdapter = new RlvGoodsListAdapter(this, list);
@@ -114,8 +109,8 @@ public class GoodsListActivity extends BaseActivity<GoodsListContract.Presenter>
     }
 
     @Override
-    public void setGoodsList(GoodsListBean bean) {
-        List<GoodsListBean.DataBeanX.DataBean> list = bean.getData().getData();
+    public void setGoodsList(GoodListBean bean) {
+        List<GoodListBean.DataBeanX.DataBean> list = bean.getData().getData();
         mAdapter.addData(list);
     }
 }

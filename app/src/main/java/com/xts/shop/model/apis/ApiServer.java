@@ -1,7 +1,8 @@
 package com.xts.shop.model.apis;
 
 
-import com.xts.shop.model.bean.GoodsListBean;
+import com.xts.shop.model.bean.GoodListBean;
+import com.xts.shop.model.bean.GoodsDetailBean;
 import com.xts.shop.model.bean.MainPageBean;
 import com.xts.shop.model.bean.LoginBean;
 import com.xts.shop.model.bean.SortCurrentBean;
@@ -44,9 +45,12 @@ public interface ApiServer {
 
     //商品列表数据
     @GET("goods/list")
-    Flowable<GoodsListBean> getGoodsList(@Query("categoryId") int categoryId,
-                                         @Query("page") int page,
-                                         @Query("size") int size);
+    Flowable<GoodListBean> getGoodsList(@Query("categoryId") int categoryId,
+                                        @Query("page") int page,
+                                        @Query("size") int size);
+    //商品详情数据
+    @GET("goods/detail")
+    Flowable<GoodsDetailBean> getGoodDetail(@Query("id") int id);
 
 
 }

@@ -3,13 +3,16 @@ package com.xts.shop.interfaces.goods;
 import com.xts.shop.interfaces.IBasePresenter;
 import com.xts.shop.interfaces.IBaseView;
 import com.xts.shop.model.bean.GoodListBean;
+import com.xts.shop.model.bean.GoodsDetailBean;
 
-public interface GoodsListContract {
+import java.util.List;
+
+public interface GoodsDetailContract {
     interface View extends IBaseView{
-        void setGoodsList(GoodListBean bean);
+        void setGoodsDetail(List<GoodsDetailBean.GoodsDetailListBean> list);
     }
 
     interface Presenter extends IBasePresenter<View>{
-        void getGoodsList(int categoryId,int page,int size);
+        void getGoodsDetail(int id);
     }
 }

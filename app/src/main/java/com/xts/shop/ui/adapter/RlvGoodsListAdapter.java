@@ -1,7 +1,6 @@
 package com.xts.shop.ui.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,11 +8,11 @@ import com.bumptech.glide.Glide;
 import com.xts.shop.R;
 import com.xts.shop.apps.BaseApp;
 import com.xts.shop.base.BaseRlvAdapter;
-import com.xts.shop.model.bean.GoodsListBean;
+import com.xts.shop.model.bean.GoodListBean;
 
 import java.util.ArrayList;
 
-public class RlvGoodsListAdapter extends BaseRlvAdapter<GoodsListBean.DataBeanX.DataBean> {
+public class RlvGoodsListAdapter extends BaseRlvAdapter<GoodListBean.DataBeanX.DataBean> {
     public RlvGoodsListAdapter(Context context, ArrayList list) {
         super(context, list);
     }
@@ -24,7 +23,7 @@ public class RlvGoodsListAdapter extends BaseRlvAdapter<GoodsListBean.DataBeanX.
     }
 
     @Override
-    protected void bindData(VH vh, GoodsListBean.DataBeanX.DataBean bean) {
+    protected void bindData(VH vh, GoodListBean.DataBeanX.DataBean bean) {
         ImageView iv = (ImageView) vh.getViewById(R.id.iv);
         TextView tvVender = (TextView) vh.getViewById(R.id.tv_vendor);
         TextView tvPrice = (TextView) vh.getViewById(R.id.tv_price);
