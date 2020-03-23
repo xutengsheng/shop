@@ -20,4 +20,5 @@ public interface Constant {
     String AVATAR = "avatar";//头像
     String DATA = "data";
     String POSITION = "position";
+    String TOTAL_PRICE = "total_price";
 }

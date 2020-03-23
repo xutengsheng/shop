@@ -1,10 +1,13 @@
 package com.xts.shop.presenter.goods;
 
+import com.xts.shop.R;
+import com.xts.shop.apps.BaseApp;
 import com.xts.shop.base.BasePresenter;
 import com.xts.shop.common.Constant;
 import com.xts.shop.common.ResponceSubscriber;
 import com.xts.shop.interfaces.goods.GoodsDetailContract;
 import com.xts.shop.model.HttpManager;
+import com.xts.shop.model.bean.AddCartBean;
 import com.xts.shop.model.bean.GoodListBean;
 import com.xts.shop.model.bean.GoodsDetailBean;
 import com.xts.shop.utils.RxUtils;
@@ -20,46 +23,51 @@ public class GoodsDetailPresenter extends BasePresenter<GoodsDetailContract.View
     public void getGoodsDetail(int id) {
         addDisposable(
                 HttpManager.getInstance().getApiService()
-                    .getGoodDetail(id)
-                    .compose(RxUtils.<GoodsDetailBean>rxScheduler())
-                        .map(new Function<GoodsDetailBean, List<GoodsDetailBean.GoodsDetailListBean>>() {
+                        .getGoodDetail(id)
+                        .compose(RxUtils.<GoodsDetailBean>rxScheduler())
+                        .subscribeWith(new ResponceSubscriber<GoodsDetailBean>(mView) {
                             @Override
-                            public List<GoodsDetailBean.GoodsDetailListBean> apply(GoodsDetailBean goodsDetailBean) throws Exception {
-                                ArrayList<GoodsDetailBean.GoodsDetailListBean> list = new ArrayList<>();
-                                //bannner+名称价格
-                                GoodsDetailBean.GoodsDetailListBean banner = new GoodsDetailBean.GoodsDetailListBean();
-                                banner.currentType = GoodsDetailBean.GoodsDetailListBean.TYPE_BANNER;
-                                banner.data = goodsDetailBean.getData();
-                                list.add(banner);
-                                
-                                //html
-                                GoodsDetailBean.GoodsDetailListBean html = new GoodsDetailBean.GoodsDetailListBean();
-                                html.currentType = GoodsDetailBean.GoodsDetailListBean.TYPE_HTML;
-                                html.data = goodsDetailBean.getData().getInfo().getGoods_desc();
-                                list.add(html);
-
-                                //issue
-                                for (int i = 0; i < goodsDetailBean.getData().getIssue().size(); i++) {
-                                    GoodsDetailBean.GoodsDetailListBean issue = new GoodsDetailBean.GoodsDetailListBean();
-                                    issue.currentType = GoodsDetailBean.GoodsDetailListBean.TYPE_ISSUE;
-                                    issue.data = goodsDetailBean.getData().getIssue().get(i);
-                                    list.add(issue);
-                                }
-                                //title
-                                GoodsDetailBean.GoodsDetailListBean title = new GoodsDetailBean.GoodsDetailListBean();
-                                title.currentType = GoodsDetailBean.GoodsDetailListBean.TYPE_TITLE;
-                                title.data = "大家都在看";
-                                list.add(title);
-
-                                return list;
+                            public void onNext(GoodsDetailBean bean) {
+                                mView.setGoodsDetail(bean);
                             }
                         })
-                    .subscribeWith(new ResponceSubscriber<List<GoodsDetailBean.GoodsDetailListBean> >(mView){
-                        @Override
-                        public void onNext(List<GoodsDetailBean.GoodsDetailListBean> list ) {
-                            mView.setGoodsDetail(list);
-                        }
-                    })
+
+        );
+    }
+
+    @Override
+    public void addCart(int goodsId, int productId, int number) {
+        addDisposable(
+                HttpManager.getInstance().getApiService()
+                        .addCart(goodsId, productId, number)
+                        .compose(RxUtils.<AddCartBean>rxScheduler())
+                        .subscribeWith(new ResponceSubscriber<AddCartBean>(mView) {
+                            @Override
+                            public void onNext(AddCartBean bean) {
+                                if (bean.getErrno() == Constant.SUCCESS_CODE) {
+                                    mView.addCartResult(bean);
+                                    mView.showTips(BaseApp.getRes().getString(R.string.add_cart_success));
+                                }
+                            }
+                        })
+
+        );
+    }
+
+    @Override
+    public void getCart() {
+        addDisposable(
+                HttpManager.getInstance().getApiService()
+                        .getCart()
+                        .compose(RxUtils.<AddCartBean>rxScheduler())
+                        .subscribeWith(new ResponceSubscriber<AddCartBean>(mView) {
+                            @Override
+                            public void onNext(AddCartBean bean) {
+                                if (bean.getErrno() == Constant.SUCCESS_CODE) {
+                                    mView.addCartResult(bean);
+                                }
+                            }
+                        })
 
         );
     }

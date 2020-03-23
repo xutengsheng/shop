@@ -14,13 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.goodsList.GoodsDetailActivity"></activity>
+        <activity android:name=".ui.search.SearchActivity"></activity>
+        <activity android:name=".ui.order.OrderActivity" />
+        <activity android:name=".ui.goodsList.GoodsDetailActivity" />
         <activity android:name=".ui.goodsList.GoodsListActivity2" />
         <activity android:name=".TestActivity" />
         <activity android:name=".ui.goodsList.GoodsListActivity" />
         <activity android:name=".ui.login.RegisterActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

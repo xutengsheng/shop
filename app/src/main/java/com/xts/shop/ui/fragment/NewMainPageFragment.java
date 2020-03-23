@@ -1,7 +1,9 @@
 package com.xts.shop.ui.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,7 +23,10 @@ import com.xts.shop.model.bean.MainPageBean;
 import com.xts.shop.presenter.mainpage.MainPagePresenter;
 import com.xts.shop.ui.adapter.NewRlvMainPageAdapter;
 import com.xts.shop.ui.adapter.RlvMainPageAdapter;
+import com.xts.shop.ui.search.SearchActivity;
 import com.youth.banner.Banner;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class NewMainPageFragment extends BaseFragment<NewMainPageContract.Presenter>
-        implements NewMainPageContract.View {
+        implements NewMainPageContract.View, View.OnClickListener {
     @BindView(R.id.rlv)
     RecyclerView mRlv;
     @BindView(R.id.srl)
@@ -85,6 +90,14 @@ public class NewMainPageFragment extends BaseFragment<NewMainPageContract.Presen
                 initData();
             }
         });
+        addSearch();
+    }
+
+    private void addSearch() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_search,null);
+        view.findViewById(R.id.tv_search).setOnClickListener(this);
+
+        mAdapter.addHeaderView(view);
     }
 
     @Override
@@ -117,5 +130,18 @@ public class NewMainPageFragment extends BaseFragment<NewMainPageContract.Presen
         banner.start();
 
         mAdapter.addHeaderView(view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_search:
+                go2Search();
+                break;
+        }
+    }
+
+    private void go2Search() {
+        startActivity(new Intent(getContext(), SearchActivity.class));
     }
 }

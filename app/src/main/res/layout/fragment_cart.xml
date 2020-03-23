@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/c_eaeaea"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:text="@string/cart"
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cl_bottom"
+        android:id="@+id/rlv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp" />
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48">
+
+        <CheckBox
+            android:text="@string/choose_all"
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:id="@+id/cb"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"/>
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:id="@+id/tv_price"
+            app:layout_constraintLeft_toRightOf="@id/cb"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"/>
+
+        <TextView
+            android:paddingRight="@dimen/dp_5"
+            app:layout_constraintRight_toLeftOf="@id/tv_order"
+            android:gravity="right|center_vertical"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintRight_toRightOf="@id/tv_order"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/tv_edit"
+            android:text="@string/edit"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/dp_60"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/sp_16"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/tv_order"
+            android:text="@string/order"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/dp_100"
+            android:layout_height="match_parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

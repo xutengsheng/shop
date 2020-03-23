@@ -29,4 +29,40 @@
     <string name="call_customer_service">联系客服</string>
     <string name="help_centre">帮助中心</string>
     <string name="feedback">意见反馈</string>
+    <string name="css_goods">
+        html,body,p{
+            padding:0px;
+            margin:0px;
+            text-align:center;
+        }
+        img{
+            width:100%;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+        }
+    </string>
+    <string name="buy">立即购买</string>
+    <string name="add_cart">加入购物车</string>
+    <string name="add_cart_success">添加成功</string>
+    <string name="choose_all">全选</string>
+    <string name="edit">编辑</string>
+    <string name="order">下单</string>
+    <string name="x">x</string>
+    <string name="complete">完成</string>
+    <string name="delete_choose">删除所选</string>
+    <string name="choosed"><![CDATA[已选择 >]]></string>
+    <string name="default_address">默认</string>
+    <string name="choose_coupon">请选择优惠券</string>
+    <string name="goods_total">商品合计</string>
+    <string name="fare">运费</string>
+    <string name="go_pay">去付款</string>
+    <string name="search">搜索</string>
+    <string name="multiple">综合</string>
+    <string name="price">价格</string>
+    <string name="input_content">请输入搜索内容</string>
+    <string name="cancel">取消</string>
+    <string name="history_record">历史记录</string>
 </resources>

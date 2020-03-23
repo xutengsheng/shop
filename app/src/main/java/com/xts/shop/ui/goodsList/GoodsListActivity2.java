@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -115,6 +117,20 @@ public class GoodsListActivity2 extends BaseActivity<GoodsListContract2.Presente
                 mPresenter.getData(mCategoryId,mPage,mSize);
             }
         });
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                go2GoodsDetail(position);
+            }
+        });
+    }
+
+    private void go2GoodsDetail(int position) {
+        Intent intent = new Intent(this,GoodsDetailActivity.class);
+        intent.putExtra(Constant.DATA,mAdapter.getData().get(position).getId());
+
+        startActivity(intent);
     }
 
     private void addHeader() {
